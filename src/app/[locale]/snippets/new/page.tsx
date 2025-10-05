@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
@@ -31,12 +31,24 @@ export default function NewSnippetPage() {
     topics: "",
   });
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
   if (status === "loading") {
-    return <div className="text-center py-8">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   if (!session) {
-    router.push("/login");
     return null;
   }
 
@@ -49,7 +61,6 @@ export default function NewSnippetPage() {
         .split(",")
         .map((t) => t.trim())
         .filter((t) => t);
-      console.log("🤔🤔🤔 ~ handleSubmit ~ formData:", formData);
 
       const complexity = analyzeComplexity(formData.code);
 
@@ -62,7 +73,6 @@ export default function NewSnippetPage() {
           complexity,
         }),
       });
-      console.log("🤔🤔🤔 ~ handleSubmit ~ response:", response);
 
       if (!response.ok) {
         throw new Error("Failed to create snippet");

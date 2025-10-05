@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Calendar, Code2, Clock } from "lucide-react";
 import { Metadata } from "next";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 60;
 interface ProfilePageProps {
   params: Promise<{
     id: string;

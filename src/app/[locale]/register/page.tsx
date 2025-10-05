@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -14,36 +14,32 @@ export default function RegisterPage() {
   const router = useRouter();
   const t = useTranslations("common");
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-      try {
-        const response = await fetch("/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, name }),
-        });
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, name }),
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (!response.ok) {
-          toast.error(data.error || "Registration failed");
-          return;
-        }
-
-        toast.success("Account created successfully!");
-        router.push("/login");
-      } catch (error) {
-        console.log("🤔🤔🤔 ~ RegisterPage ~ error:", error);
-        toast.error("Something went wrong");
-      } finally {
-        setIsLoading(false);
+      if (!response.ok) {
+        toast.error(data.error || "Registration failed");
+        return;
       }
-    },
-    [email, password, name, router]
-  );
+
+      toast.success("Account created successfully!");
+      router.push("/login");
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">

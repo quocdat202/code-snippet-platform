@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 30;
 export default async function HomePage() {
   const t = await getTranslations("home");
 

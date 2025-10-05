@@ -7,7 +7,8 @@ import CodeBlock from "@/components/CodeBlock";
 import DeleteButton from "@/components/DeleteButton";
 import ShareSection from "@/components/ShareSection";
 import { Metadata } from "next";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 interface SnippetPageProps {
   params: Promise<{
     id: string;
