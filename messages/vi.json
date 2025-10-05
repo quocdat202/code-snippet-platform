@@ -1,0 +1,59 @@
+{
+  "common": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "logout": "Đăng xuất",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "create": "Tạo mới",
+    "loading": "Đang tải...",
+    "profile": "Hồ sơ"
+  },
+  "home": {
+    "title": "Nền tảng chia sẻ Code",
+    "subtitle": "Chia sẻ và khám phá code snippets với phân tích độ phức tạp",
+    "cta": "Chia sẻ Code của bạn",
+    "latestSnippets": "Snippets mới nhất",
+    "filteredSnippets": "Snippets đã lọc",
+    "noSnippets": "Không tìm thấy snippets",
+    "filterByLanguage": "Lọc theo Ngôn ngữ",
+    "all": "Tất cả"
+  },
+  "snippet": {
+    "create": "Tạo Snippet",
+    "edit": "Sửa Snippet",
+    "title": "Tiêu đề",
+    "description": "Mô tả",
+    "code": "Mã nguồn",
+    "language": "Ngôn ngữ",
+    "topics": "Chủ đề",
+    "complexity": "Độ phức tạp",
+    "created": "Đã tạo",
+    "shareSnippet": "Chia sẻ snippet này",
+    "copyLink": "Sao chép Link",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa snippet này?",
+    "deleteSuccess": "Đã xóa snippet thành công",
+    "createSuccess": "Đã tạo snippet thành công!",
+    "updateSuccess": "Đã cập nhật snippet thành công!"
+  },
+  "auth": {
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu",
+    "name": "Tên",
+    "loginTitle": "Đăng nhập vào tài khoản",
+    "registerTitle": "Tạo tài khoản mới",
+    "orLogin": "Hoặc đăng nhập vào tài khoản",
+    "orRegister": "Hoặc tạo tài khoản mới",
+    "loginError": "Email hoặc mật khẩu không hợp lệ",
+    "registerError": "Đăng ký thất bại",
+    "registerSuccess": "Đã tạo tài khoản thành công!"
+  },
+  "profile": {
+    "publicSnippets": "Snippets công khai",
+    "noSnippets": "Chưa có snippets công khai",
+    "joined": "Tham gia",
+    "snippets": "snippets"
+  }
+}

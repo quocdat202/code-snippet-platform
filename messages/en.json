@@ -1,0 +1,59 @@
+{
+  "common": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "loading": "Loading...",
+    "profile": "Profile"
+  },
+  "home": {
+    "title": "Code Snippet Platform",
+    "subtitle": "Share and discover code snippets with complexity analysis",
+    "cta": "Share Your Code",
+    "latestSnippets": "Latest Snippets",
+    "filteredSnippets": "Filtered Snippets",
+    "noSnippets": "No snippets found",
+    "filterByLanguage": "Filter by Language",
+    "all": "All"
+  },
+  "snippet": {
+    "create": "Create Snippet",
+    "edit": "Edit Snippet",
+    "title": "Title",
+    "description": "Description",
+    "code": "Code",
+    "language": "Language",
+    "topics": "Topics",
+    "complexity": "Time Complexity",
+    "created": "Created",
+    "shareSnippet": "Share this snippet",
+    "copyLink": "Copy Link",
+    "deleteConfirm": "Are you sure you want to delete this snippet?",
+    "deleteSuccess": "Snippet deleted successfully",
+    "createSuccess": "Snippet created successfully!",
+    "updateSuccess": "Snippet updated successfully!"
+  },
+  "auth": {
+    "email": "Email address",
+    "password": "Password",
+    "name": "Name",
+    "loginTitle": "Sign in to your account",
+    "registerTitle": "Create a new account",
+    "orLogin": "Or sign in to your account",
+    "orRegister": "Or create a new account",
+    "loginError": "Invalid email or password",
+    "registerError": "Registration failed",
+    "registerSuccess": "Account created successfully!"
+  },
+  "profile": {
+    "publicSnippets": "Public Snippets",
+    "noSnippets": "No public snippets yet",
+    "joined": "Joined",
+    "snippets": "snippets"
+  }
+}
