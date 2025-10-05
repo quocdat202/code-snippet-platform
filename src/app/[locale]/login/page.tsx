@@ -55,7 +55,7 @@ export default function LoginPage() {
               href="/register"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
-              {t("createNewAccount")}
+              {t("orRegister")}
             </Link>
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function LoginPage() {
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="bg-white rounded-md shadow-sm -space-y-px">
               <label htmlFor="email" className="sr-only">
-                {t("emailAddress")}
+                {t("email")}
               </label>
               <input
                 id="email"
@@ -73,7 +73,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder={t("emailAddress")}
+                placeholder={t("email")}
               />
             </div>
             <div>

@@ -44,11 +44,14 @@
     "name": "Name",
     "loginTitle": "Sign in to your account",
     "registerTitle": "Create a new account",
+    "or": "Or",
     "orLogin": "Or sign in to your account",
-    "orRegister": "Or create a new account",
+    "orRegister": "Create a new account",
     "loginError": "Invalid email or password",
     "registerError": "Registration failed",
-    "registerSuccess": "Account created successfully!"
+    "registerSuccess": "Account created successfully!",
+    "loginButton": "Login",
+    "loading": "Loading..."
   },
   "profile": {
     "publicSnippets": "Public Snippets",
