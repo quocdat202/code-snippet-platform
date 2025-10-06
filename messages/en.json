@@ -9,7 +9,13 @@
     "edit": "Edit",
     "create": "Create",
     "loading": "Loading...",
-    "profile": "Profile"
+    "profile": "Profile",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email address",
+    "emailPlaceholder": "Email address",
+    "password": "Password",
+    "passwordPlaceholder": "Password (min 6 characters)"
   },
   "home": {
     "title": "Code Snippet Platform",
@@ -25,10 +31,14 @@
     "create": "Create Snippet",
     "edit": "Edit Snippet",
     "title": "Title",
+    "titlePlaceholder": "e.g., Binary Search Implementation",
     "description": "Description",
+    "descriptionPlaceholder": "Describe what this code does...",
     "code": "Code",
     "language": "Language",
-    "topics": "Topics",
+    "topics": "Topics (comma separated)",
+    "topicsPlaceholder": "e.g., algorithms, sorting, search",
+    "codePlaceholder": "Paste your code here...",
     "complexity": "Time Complexity",
     "created": "Created",
     "shareSnippet": "Share this snippet",
@@ -51,7 +61,8 @@
     "registerError": "Registration failed",
     "registerSuccess": "Account created successfully!",
     "loginButton": "Login",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "loginSuccess": "Logged in successfully!"
   },
   "profile": {
     "publicSnippets": "Public Snippets",

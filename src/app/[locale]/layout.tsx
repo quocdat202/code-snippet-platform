@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Navigation from "@/components/Navigation";
 import SessionProvider from "@/components/SessionProvider";
 import { Metadata } from "next";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),

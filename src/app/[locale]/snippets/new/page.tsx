@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { analyzeComplexity } from "@/lib/complexity-analyzer";
+import { useTranslations } from "next-intl";
 
 const LANGUAGES = [
   "JavaScript",
@@ -21,6 +22,8 @@ const LANGUAGES = [
 
 export default function NewSnippetPage() {
   const router = useRouter();
+  const t = useTranslations("snippet");
+
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -98,7 +101,7 @@ export default function NewSnippetPage() {
             htmlFor="title"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Title *
+            {t("title")} *
           </label>
           <input
             type="text"
@@ -109,7 +112,7 @@ export default function NewSnippetPage() {
               setFormData({ ...formData, title: e.target.value })
             }
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            placeholder="e.g., Binary Search Implementation"
+            placeholder={t("titlePlaceholder")}
           />
         </div>
 
@@ -118,7 +121,7 @@ export default function NewSnippetPage() {
             htmlFor="description"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Description
+            {t("description")}
           </label>
           <textarea
             id="description"
@@ -128,7 +131,7 @@ export default function NewSnippetPage() {
             }
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             rows={3}
-            placeholder="Describe what this code does..."
+            placeholder={t("descriptionPlaceholder")}
           />
         </div>
 
@@ -137,7 +140,7 @@ export default function NewSnippetPage() {
             htmlFor="language"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Language *
+            {t("language")} *
           </label>
           <select
             id="language"
@@ -161,7 +164,7 @@ export default function NewSnippetPage() {
             htmlFor="topics"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Topics (comma separated)
+            {t("topics")}
           </label>
           <input
             type="text"
@@ -171,7 +174,7 @@ export default function NewSnippetPage() {
               setFormData({ ...formData, topics: e.target.value })
             }
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            placeholder="e.g., algorithms, sorting, search"
+            placeholder={t("topicsPlaceholder")}
           />
         </div>
 
@@ -189,7 +192,7 @@ export default function NewSnippetPage() {
             onChange={(e) => setFormData({ ...formData, code: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
             rows={15}
-            placeholder="Paste your code here..."
+            placeholder={t("codePlaceholder")}
           />
         </div>
 
@@ -199,7 +202,7 @@ export default function NewSnippetPage() {
             disabled={isLoading}
             className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
           >
-            {isLoading ? "Creating..." : "Create Snippet"}
+            {isLoading ? t("loading") : t("createSnippet")}
           </button>
           <button
             type="button"
