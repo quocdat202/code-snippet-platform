@@ -46,7 +46,8 @@
     "deleteConfirm": "Bạn có chắc chắn muốn xóa đoạn mã này không?",
     "deleteSuccess": "Đã xóa đoạn mã thành công",
     "createSuccess": "Tạo đoạn mã thành công!",
-    "updateSuccess": "Cập nhật đoạn mã thành công!"
+    "updateSuccess": "Cập nhật đoạn mã thành công!",
+    "loading": "Đang tải..."
   },
   "auth": {
     "email": "Địa chỉ email",

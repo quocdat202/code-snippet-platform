@@ -43,6 +43,7 @@
     "created": "Created",
     "shareSnippet": "Share this snippet",
     "copyLink": "Copy Link",
+    "loading": "Loading...",
     "deleteConfirm": "Are you sure you want to delete this snippet?",
     "deleteSuccess": "Snippet deleted successfully",
     "createSuccess": "Snippet created successfully!",
