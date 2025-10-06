@@ -202,7 +202,7 @@ export default function NewSnippetPage() {
             disabled={isLoading}
             className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
           >
-            {isLoading ? t("loading") : t("createSnippet")}
+            {isLoading ? t("common.loading") : t("create")}
           </button>
           <button
             type="button"
