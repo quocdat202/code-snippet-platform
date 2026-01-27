@@ -7,30 +7,344 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ============================================
+// USER MODEL (mở rộng)
+// ============================================
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  password      String
-  name          String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  snippets      Snippet[]
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  password            String
+  name                String?
+
+  // Profile mở rộng
+  avatarUrl           String?   @map("avatar_url")
+  bio                 String?   @db.Text
+  website             String?
+  github              String?
+  twitter             String?
+  location            String?
+  isVerified          Boolean   @default(false) @map("is_verified")
+
+  // Statistics
+  followerCount       Int       @default(0) @map("follower_count")
+  followingCount      Int       @default(0) @map("following_count")
+  snippetCount        Int       @default(0) @map("snippet_count")
+  totalLikesReceived  Int       @default(0) @map("total_likes_received")
+
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  // Relations
+  snippets            Snippet[]
+  likes               Like[]
+  comments            Comment[]
+  bookmarks           Bookmark[]
+  collections         Collection[]
+  notifications       Notification[]
+
+  // Follow relations
+  followers           Follow[]  @relation("following")
+  following           Follow[]  @relation("follower")
+
+  // Reports
+  reportsMade         Report[]  @relation("reporter")
+  reportsResolved     Report[]  @relation("resolver")
+
+  // Notifications as actor
+  actedNotifications  Notification[] @relation("actor")
 }
 
+// ============================================
+// SNIPPET MODEL (mở rộng)
+// ============================================
 model Snippet {
   id          String   @id @default(cuid())
   title       String
-  description String?
+  description String?  @db.Text
   code        String   @db.Text
   language    String
-  topics      String[] // Array of topics
+  topics      String[] // Legacy - sẽ migrate sang tags
   complexity  String?  // O(n), O(n²), etc.
   isPublic    Boolean  @default(true)
+
+  // Statistics
+  likeCount    Int     @default(0) @map("like_count")
+  commentCount Int     @default(0) @map("comment_count")
+  forkCount    Int     @default(0) @map("fork_count")
+  viewCount    Int     @default(0) @map("view_count")
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // Relations
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
+  tags        SnippetTag[]
+  likes       Like[]
+  comments    Comment[]
+  bookmarks   Bookmark[]
+  versions    SnippetVersion[]
+  views       SnippetView[]
+  reports     Report[]
+  collectionSnippets CollectionSnippet[]
+  notifications Notification[]
+
+  // Fork relations
+  forkedFrom  Fork?    @relation("forkedSnippet")
+  forks       Fork[]   @relation("originalSnippet")
+
   @@index([userId])
   @@index([language])
+  @@index([isPublic])
+  @@index([createdAt])
+}
+
+// ============================================
+// TAGS SYSTEM
+// ============================================
+model Tag {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  color       String   @default("#6B7280")
+  usageCount  Int      @default(0) @map("usage_count")
+  createdAt   DateTime @default(now())
+
+  snippets    SnippetTag[]
+
+  @@map("tags")
+}
+
+model SnippetTag {
+  snippetId   String
+  tagId       Int
+  createdAt   DateTime @default(now())
+
+  snippet     Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  tag         Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([snippetId, tagId])
+  @@index([snippetId])
+  @@index([tagId])
+  @@map("snippet_tags")
+}
+
+// ============================================
+// LIKES SYSTEM
+// ============================================
+model Like {
+  id          Int      @id @default(autoincrement())
+  userId      String   @map("user_id")
+  snippetId   String   @map("snippet_id")
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  snippet     Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, snippetId])
+  @@index([snippetId])
+  @@index([userId])
+  @@map("likes")
+}
+
+// ============================================
+// COMMENTS SYSTEM
+// ============================================
+model Comment {
+  id          Int       @id @default(autoincrement())
+  userId      String    @map("user_id")
+  snippetId   String    @map("snippet_id")
+  content     String    @db.Text
+  parentId    Int?      @map("parent_id")
+  isEdited    Boolean   @default(false) @map("is_edited")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  snippet     Snippet   @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  parent      Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Comment[] @relation("CommentReplies")
+
+  notifications Notification[]
+  reports     Report[]
+
+  @@index([snippetId])
+  @@index([userId])
+  @@index([parentId])
+  @@map("comments")
+}
+
+// ============================================
+// BOOKMARKS SYSTEM
+// ============================================
+model Bookmark {
+  id          Int      @id @default(autoincrement())
+  userId      String   @map("user_id")
+  snippetId   String   @map("snippet_id")
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  snippet     Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, snippetId])
+  @@index([userId])
+  @@index([snippetId])
+  @@map("bookmarks")
+}
+
+// ============================================
+// COLLECTIONS SYSTEM
+// ============================================
+model Collection {
+  id          Int       @id @default(autoincrement())
+  userId      String    @map("user_id")
+  name        String
+  slug        String
+  description String?   @db.Text
+  isPublic    Boolean   @default(true) @map("is_public")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  snippets    CollectionSnippet[]
+
+  @@unique([userId, slug])
+  @@index([userId])
+  @@map("collections")
+}
+
+model CollectionSnippet {
+  collectionId Int      @map("collection_id")
+  snippetId    String   @map("snippet_id")
+  sortOrder    Int      @default(0) @map("sort_order")
+  addedAt      DateTime @default(now()) @map("added_at")
+
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  snippet      Snippet    @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, snippetId])
+  @@index([collectionId])
+  @@map("collection_snippets")
+}
+
+// ============================================
+// FOLLOWS SYSTEM
+// ============================================
+model Follow {
+  id          Int      @id @default(autoincrement())
+  followerId  String   @map("follower_id")
+  followingId String   @map("following_id")
+  createdAt   DateTime @default(now())
+
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
+}
+
+// ============================================
+// NOTIFICATIONS SYSTEM
+// ============================================
+model Notification {
+  id          Int       @id @default(autoincrement())
+  userId      String    @map("user_id")
+  type        String    // 'like', 'comment', 'follow', 'fork', 'mention'
+  actorId     String?   @map("actor_id")
+  snippetId   String?   @map("snippet_id")
+  commentId   Int?      @map("comment_id")
+  message     String?   @db.Text
+  isRead      Boolean   @default(false) @map("is_read")
+  createdAt   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  actor       User?     @relation("actor", fields: [actorId], references: [id], onDelete: SetNull)
+  snippet     Snippet?  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  comment     Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+// ============================================
+// FORKS SYSTEM
+// ============================================
+model Fork {
+  id                  Int      @id @default(autoincrement())
+  originalSnippetId   String   @map("original_snippet_id")
+  forkedSnippetId     String   @unique @map("forked_snippet_id")
+  createdAt           DateTime @default(now())
+
+  originalSnippet     Snippet  @relation("originalSnippet", fields: [originalSnippetId], references: [id], onDelete: Cascade)
+  forkedSnippet       Snippet  @relation("forkedSnippet", fields: [forkedSnippetId], references: [id], onDelete: Cascade)
+
+  @@index([originalSnippetId])
+  @@map("forks")
+}
+
+// ============================================
+// SNIPPET VERSIONS SYSTEM
+// ============================================
+model SnippetVersion {
+  id          Int      @id @default(autoincrement())
+  snippetId   String   @map("snippet_id")
+  version     Int
+  title       String
+  code        String   @db.Text
+  language    String
+  changeNote  String?  @map("change_note")
+  createdAt   DateTime @default(now())
+
+  snippet     Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@unique([snippetId, version])
+  @@index([snippetId])
+  @@map("snippet_versions")
+}
+
+// ============================================
+// SNIPPET VIEWS SYSTEM
+// ============================================
+model SnippetView {
+  id          Int      @id @default(autoincrement())
+  snippetId   String   @map("snippet_id")
+  userId      String?  @map("user_id")
+  ipHash      String?  @map("ip_hash")
+  userAgent   String?  @map("user_agent")
+  referer     String?
+  viewedAt    DateTime @default(now()) @map("viewed_at")
+
+  snippet     Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@index([snippetId])
+  @@index([viewedAt])
+  @@map("snippet_views")
+}
+
+// ============================================
+// REPORTS SYSTEM
+// ============================================
+model Report {
+  id          Int       @id @default(autoincrement())
+  reporterId  String    @map("reporter_id")
+  snippetId   String?   @map("snippet_id")
+  commentId   Int?      @map("comment_id")
+  reason      String    // 'spam', 'inappropriate', 'copyright', 'other'
+  description String?   @db.Text
+  status      String    @default("pending") // 'pending', 'resolved', 'dismissed'
+  resolvedBy  String?   @map("resolved_by")
+  resolvedAt  DateTime? @map("resolved_at")
+  createdAt   DateTime  @default(now())
+
+  reporter    User      @relation("reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  resolver    User?     @relation("resolver", fields: [resolvedBy], references: [id], onDelete: SetNull)
+  snippet     Snippet?  @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+  comment     Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@map("reports")
 }

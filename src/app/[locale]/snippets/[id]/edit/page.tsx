@@ -59,7 +59,7 @@ export default function EditSnippetPage({
           language: snippet.language,
           topics: snippet.topics.join(", "),
         });
-      } catch (error) {
+      } catch {
         toast.error("Failed to load snippet");
         router.push("/");
       } finally {
@@ -103,7 +103,7 @@ export default function EditSnippetPage({
 
         toast.success("Snippet updated successfully!");
         router.push(`/snippets/${id}`);
-      } catch (error) {
+      } catch {
         toast.error("Failed to update snippet");
       } finally {
         setIsSaving(false);

@@ -15,17 +15,56 @@
     "email": "Địa chỉ email",
     "emailPlaceholder": "Nhập địa chỉ email",
     "password": "Mật khẩu",
-    "passwordPlaceholder": "Mật khẩu (tối thiểu 6 ký tự)"
+    "passwordPlaceholder": "Mật khẩu (tối thiểu 6 ký tự)",
+    "saving": "Đang lưu...",
+    "previous": "Trước",
+    "next": "Tiếp"
   },
   "home": {
     "title": "Nền tảng chia sẻ đoạn mã",
     "subtitle": "Chia sẻ và khám phá các đoạn mã có phân tích độ phức tạp",
+    "heroTitle": "Chia sẻ, Khám phá & Học hỏi",
+    "heroTitleHighlight": "Đoạn mã",
+    "heroDescription": "Nền tảng cộng tác dành cho lập trình viên để chia sẻ đoạn mã tái sử dụng, khám phá giải pháp và học hỏi từ cộng đồng.",
     "cta": "Chia sẻ đoạn mã của bạn",
+    "getStarted": "Bắt đầu ngay",
+    "browseSnippets": "Duyệt đoạn mã",
     "latestSnippets": "Đoạn mã mới nhất",
+    "trendingSnippets": "Đoạn mã nổi bật",
     "filteredSnippets": "Đoạn mã đã lọc",
     "noSnippets": "Không tìm thấy đoạn mã nào",
     "filterByLanguage": "Lọc theo ngôn ngữ",
-    "all": "Tất cả"
+    "all": "Tất cả",
+    "viewAll": "Xem tất cả",
+    "popularTags": "Nhãn phổ biến",
+    "topContributors": "Người đóng góp hàng đầu",
+    "stats": {
+      "title": "Thống kê nền tảng",
+      "totalSnippets": "Tổng đoạn mã",
+      "totalUsers": "Lập trình viên",
+      "totalLikes": "Lượt thích",
+      "totalForks": "Lượt fork"
+    },
+    "features": {
+      "title": "Tại sao chọn chúng tôi?",
+      "subtitle": "Mọi thứ bạn cần để chia sẻ và khám phá code",
+      "share": {
+        "title": "Chia sẻ Code",
+        "description": "Chia sẻ đoạn mã với cộng đồng. Hỗ trợ hơn 50 ngôn ngữ lập trình với syntax highlighting."
+      },
+      "discover": {
+        "title": "Khám phá Giải pháp",
+        "description": "Tìm đoạn mã cho các vấn đề thường gặp. Tìm kiếm theo ngôn ngữ, nhãn hoặc độ phức tạp."
+      },
+      "collaborate": {
+        "title": "Cộng tác",
+        "description": "Fork đoạn mã, để lại bình luận và cộng tác với các lập trình viên khác."
+      },
+      "organize": {
+        "title": "Tổ chức",
+        "description": "Tạo bộ sưu tập và đánh dấu các đoạn mã yêu thích để truy cập nhanh."
+      }
+    }
   },
   "snippet": {
     "create": "Tạo đoạn mã",
@@ -47,7 +86,19 @@
     "deleteSuccess": "Đã xóa đoạn mã thành công",
     "createSuccess": "Tạo đoạn mã thành công!",
     "updateSuccess": "Cập nhật đoạn mã thành công!",
-    "loading": "Đang tải..."
+    "loading": "Đang tải...",
+    "visibility": "Chế độ hiển thị",
+    "public": "Công khai",
+    "private": "Riêng tư",
+    "publicDescription": "Mọi người đều có thể xem đoạn mã này",
+    "privateDescription": "Chỉ bạn mới có thể xem đoạn mã này",
+    "tags": "Nhãn",
+    "tagsPlaceholder": "Thêm nhãn...",
+    "addTag": "Thêm nhãn",
+    "views": "lượt xem",
+    "forks": "lượt fork",
+    "likes": "lượt thích",
+    "comments": "bình luận"
   },
   "auth": {
     "email": "Địa chỉ email",
@@ -69,6 +120,91 @@
     "publicSnippets": "Đoạn mã công khai",
     "noSnippets": "Chưa có đoạn mã công khai nào",
     "joined": "Tham gia từ",
-    "snippets": "đoạn mã"
+    "snippets": "đoạn mã",
+    "editProfile": "Chỉnh sửa hồ sơ",
+    "followers": "Người theo dõi",
+    "following": "Đang theo dõi",
+    "follow": "Theo dõi",
+    "unfollow": "Bỏ theo dõi",
+    "bio": "Giới thiệu",
+    "bioPlaceholder": "Giới thiệu về bản thân...",
+    "website": "Website",
+    "websitePlaceholder": "https://website-cua-ban.com",
+    "location": "Vị trí",
+    "locationPlaceholder": "Thành phố, Quốc gia",
+    "github": "GitHub",
+    "githubPlaceholder": "Tên người dùng GitHub của bạn",
+    "twitter": "Twitter",
+    "twitterPlaceholder": "Tên người dùng Twitter của bạn",
+    "avatarUrl": "URL ảnh đại diện",
+    "avatarUrlPlaceholder": "https://example.com/avatar.jpg",
+    "updateSuccess": "Cập nhật hồ sơ thành công!",
+    "updateError": "Cập nhật hồ sơ thất bại"
+  },
+  "bookmarks": {
+    "title": "Đã lưu",
+    "empty": "Chưa có đoạn mã nào được lưu",
+    "emptyDescription": "Các đoạn mã bạn lưu sẽ xuất hiện ở đây",
+    "previous": "Trước",
+    "next": "Tiếp"
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "empty": "Chưa có thông báo nào",
+    "emptyDescription": "Bạn sẽ được thông báo khi ai đó tương tác với đoạn mã của bạn",
+    "markAllRead": "Đánh dấu đã đọc tất cả",
+    "previous": "Trước",
+    "next": "Tiếp"
+  },
+  "collections": {
+    "title": "Bộ sưu tập",
+    "create": "Tạo bộ sưu tập",
+    "createNew": "Tạo bộ sưu tập mới",
+    "empty": "Chưa có bộ sưu tập nào",
+    "emptyDescription": "Tạo bộ sưu tập để sắp xếp các đoạn mã yêu thích của bạn",
+    "createFirst": "Tạo bộ sưu tập đầu tiên",
+    "name": "Tên",
+    "namePlaceholder": "Bộ sưu tập tuyệt vời của tôi",
+    "description": "Mô tả",
+    "descriptionPlaceholder": "Bộ sưu tập này về chủ đề gì?",
+    "visibility": "Chế độ hiển thị",
+    "public": "Công khai",
+    "private": "Riêng tư",
+    "cancel": "Hủy",
+    "snippets": "đoạn mã",
+    "addToCollection": "Thêm vào bộ sưu tập",
+    "removeFromCollection": "Xóa khỏi bộ sưu tập"
+  },
+  "navigation": {
+    "home": "Trang chủ",
+    "explore": "Khám phá",
+    "bookmarks": "Đã lưu",
+    "collections": "Bộ sưu tập",
+    "notifications": "Thông báo",
+    "profile": "Hồ sơ",
+    "newSnippet": "Tạo mới",
+    "settings": "Cài đặt"
+  },
+  "comments": {
+    "title": "Bình luận",
+    "placeholder": "Viết bình luận...",
+    "submit": "Đăng bình luận",
+    "reply": "Trả lời",
+    "replyPlaceholder": "Viết câu trả lời...",
+    "submitReply": "Đăng trả lời",
+    "cancel": "Hủy",
+    "noComments": "Chưa có bình luận nào",
+    "beFirst": "Hãy là người đầu tiên bình luận!",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa bình luận này không?"
+  },
+  "actions": {
+    "like": "Thích",
+    "unlike": "Bỏ thích",
+    "bookmark": "Lưu",
+    "removeBookmark": "Bỏ lưu",
+    "fork": "Fork",
+    "share": "Chia sẻ",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép!"
   }
 }

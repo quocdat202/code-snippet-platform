@@ -15,17 +15,56 @@
     "email": "Email address",
     "emailPlaceholder": "Email address",
     "password": "Password",
-    "passwordPlaceholder": "Password (min 6 characters)"
+    "passwordPlaceholder": "Password (min 6 characters)",
+    "saving": "Saving...",
+    "previous": "Previous",
+    "next": "Next"
   },
   "home": {
     "title": "Code Snippet Platform",
     "subtitle": "Share and discover code snippets with complexity analysis",
+    "heroTitle": "Share, Discover & Learn",
+    "heroTitleHighlight": "Code Snippets",
+    "heroDescription": "A collaborative platform for developers to share reusable code snippets, discover solutions, and learn from the community.",
     "cta": "Share Your Code",
+    "getStarted": "Get Started",
+    "browseSnippets": "Browse Snippets",
     "latestSnippets": "Latest Snippets",
+    "trendingSnippets": "Trending Snippets",
     "filteredSnippets": "Filtered Snippets",
     "noSnippets": "No snippets found",
     "filterByLanguage": "Filter by Language",
-    "all": "All"
+    "all": "All",
+    "viewAll": "View All",
+    "popularTags": "Popular Tags",
+    "topContributors": "Top Contributors",
+    "stats": {
+      "title": "Platform Statistics",
+      "totalSnippets": "Total Snippets",
+      "totalUsers": "Developers",
+      "totalLikes": "Total Likes",
+      "totalForks": "Total Forks"
+    },
+    "features": {
+      "title": "Why Choose Us?",
+      "subtitle": "Everything you need to share and discover code",
+      "share": {
+        "title": "Share Code",
+        "description": "Share your code snippets with the community. Support for 50+ programming languages with syntax highlighting."
+      },
+      "discover": {
+        "title": "Discover Solutions",
+        "description": "Find code snippets for common problems. Search by language, tags, or complexity."
+      },
+      "collaborate": {
+        "title": "Collaborate",
+        "description": "Fork snippets, leave comments, and collaborate with other developers."
+      },
+      "organize": {
+        "title": "Organize",
+        "description": "Create collections and bookmark your favorite snippets for easy access."
+      }
+    }
   },
   "snippet": {
     "create": "Create Snippet",
@@ -47,7 +86,19 @@
     "deleteConfirm": "Are you sure you want to delete this snippet?",
     "deleteSuccess": "Snippet deleted successfully",
     "createSuccess": "Snippet created successfully!",
-    "updateSuccess": "Snippet updated successfully!"
+    "updateSuccess": "Snippet updated successfully!",
+    "visibility": "Visibility",
+    "public": "Public",
+    "private": "Private",
+    "publicDescription": "Anyone can view this snippet",
+    "privateDescription": "Only you can view this snippet",
+    "tags": "Tags",
+    "tagsPlaceholder": "Add tags...",
+    "addTag": "Add tag",
+    "views": "views",
+    "forks": "forks",
+    "likes": "likes",
+    "comments": "comments"
   },
   "auth": {
     "email": "Email address",
@@ -69,6 +120,91 @@
     "publicSnippets": "Public Snippets",
     "noSnippets": "No public snippets yet",
     "joined": "Joined",
-    "snippets": "snippets"
+    "snippets": "snippets",
+    "editProfile": "Edit Profile",
+    "followers": "Followers",
+    "following": "Following",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
+    "website": "Website",
+    "websitePlaceholder": "https://yourwebsite.com",
+    "location": "Location",
+    "locationPlaceholder": "City, Country",
+    "github": "GitHub",
+    "githubPlaceholder": "Your GitHub username",
+    "twitter": "Twitter",
+    "twitterPlaceholder": "Your Twitter username",
+    "avatarUrl": "Avatar URL",
+    "avatarUrlPlaceholder": "https://example.com/avatar.jpg",
+    "updateSuccess": "Profile updated successfully!",
+    "updateError": "Failed to update profile"
+  },
+  "bookmarks": {
+    "title": "Bookmarks",
+    "empty": "No bookmarks yet",
+    "emptyDescription": "Snippets you bookmark will appear here",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications yet",
+    "emptyDescription": "You'll be notified when someone interacts with your snippets",
+    "markAllRead": "Mark all as read",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "collections": {
+    "title": "Collections",
+    "create": "Create Collection",
+    "createNew": "Create New Collection",
+    "empty": "No collections yet",
+    "emptyDescription": "Create collections to organize your favorite snippets",
+    "createFirst": "Create your first collection",
+    "name": "Name",
+    "namePlaceholder": "My Awesome Collection",
+    "description": "Description",
+    "descriptionPlaceholder": "What is this collection about?",
+    "visibility": "Visibility",
+    "public": "Public",
+    "private": "Private",
+    "cancel": "Cancel",
+    "snippets": "snippets",
+    "addToCollection": "Add to Collection",
+    "removeFromCollection": "Remove from Collection"
+  },
+  "navigation": {
+    "home": "Home",
+    "explore": "Explore",
+    "bookmarks": "Bookmarks",
+    "collections": "Collections",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "newSnippet": "New Snippet",
+    "settings": "Settings"
+  },
+  "comments": {
+    "title": "Comments",
+    "placeholder": "Write a comment...",
+    "submit": "Post Comment",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply...",
+    "submitReply": "Post Reply",
+    "cancel": "Cancel",
+    "noComments": "No comments yet",
+    "beFirst": "Be the first to comment!",
+    "deleteConfirm": "Are you sure you want to delete this comment?"
+  },
+  "actions": {
+    "like": "Like",
+    "unlike": "Unlike",
+    "bookmark": "Bookmark",
+    "removeBookmark": "Remove Bookmark",
+    "fork": "Fork",
+    "share": "Share",
+    "copy": "Copy",
+    "copied": "Copied!"
   }
 }

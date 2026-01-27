@@ -28,7 +28,7 @@ export default function DeleteButton({ snippetId }: { snippetId: string }) {
       toast.success("Snippet deleted successfully");
       router.push("/");
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error("Failed to delete snippet");
     } finally {
       setIsDeleting(false);

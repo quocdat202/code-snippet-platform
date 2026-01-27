@@ -1,17 +1,18 @@
 "use client";
 
 import { LOCALES } from "@/constant";
-import { Code2, LogOut, Menu, Plus, User, X } from "lucide-react";
+import { Code2, LogOut, Menu, Plus, User, X, Bookmark, FolderOpen } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import NotificationDropdown from "./NotificationDropdown";
 
 export default function Navigation() {
   const t = useTranslations("common");
-  const locale = useLocale();
+  useLocale();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -49,7 +50,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2">
             {session ? (
               <>
                 <Link
@@ -60,15 +61,30 @@ export default function Navigation() {
                   <span>{t("create")}</span>
                 </Link>
                 <Link
+                  href="/bookmarks"
+                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full"
+                  title="Bookmarks"
+                >
+                  <Bookmark className="h-5 w-5" />
+                </Link>
+                <Link
+                  href="/collections"
+                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full"
+                  title="Collections"
+                >
+                  <FolderOpen className="h-5 w-5" />
+                </Link>
+                <NotificationDropdown />
+                <Link
                   href={`/profile/${session.user?.id}`}
-                  className="flex items-center space-x-1 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                  className="flex items-center space-x-1 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
                 >
                   <User className="h-4 w-4" />
                   <span>Profile</span>
                 </Link>
                 <button
                   onClick={() => signOut()}
-                  className="flex items-center space-x-1 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                  className="flex items-center space-x-1 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
                 >
                   <LogOut className="h-4 w-4" />
                   <span>{t("logout")}</span>
