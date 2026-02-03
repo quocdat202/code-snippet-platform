@@ -41,105 +41,125 @@ export const dynamic = "force-dynamic";
 export const revalidate = 30;
 
 async function getStats() {
-  const [snippetCount, userCount, totalLikes, totalForks] = await Promise.all([
-    prisma.snippet.count({ where: { isPublic: true } }),
-    prisma.user.count(),
-    prisma.snippet.aggregate({
-      _sum: { likeCount: true },
-      where: { isPublic: true },
-    }),
-    prisma.snippet.aggregate({
-      _sum: { forkCount: true },
-      where: { isPublic: true },
-    }),
-  ]);
+  try {
+    const [snippetCount, userCount, totalLikes, totalForks] = await Promise.all([
+      prisma.snippet.count({ where: { isPublic: true } }),
+      prisma.user.count(),
+      prisma.snippet.aggregate({
+        _sum: { likeCount: true },
+        where: { isPublic: true },
+      }),
+      prisma.snippet.aggregate({
+        _sum: { forkCount: true },
+        where: { isPublic: true },
+      }),
+    ]);
 
-  return {
-    snippets: snippetCount,
-    users: userCount,
-    likes: totalLikes._sum.likeCount || 0,
-    forks: totalForks._sum.forkCount || 0,
-  };
+    return {
+      snippets: snippetCount,
+      users: userCount,
+      likes: totalLikes._sum.likeCount || 0,
+      forks: totalForks._sum.forkCount || 0,
+    };
+  } catch {
+    return { snippets: 0, users: 0, likes: 0, forks: 0 };
+  }
 }
 
 async function getTrendingSnippets() {
-  return prisma.snippet.findMany({
-    where: { isPublic: true },
-    orderBy: [{ likeCount: "desc" }, { viewCount: "desc" }],
-    take: 4,
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          avatarUrl: true,
+  try {
+    return await prisma.snippet.findMany({
+      where: { isPublic: true },
+      orderBy: [{ likeCount: "desc" }, { viewCount: "desc" }],
+      take: 4,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatarUrl: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+            comments: true,
+          },
         },
       },
-      tags: {
-        include: {
-          tag: true,
-        },
-      },
-      _count: {
-        select: {
-          likes: true,
-          comments: true,
-        },
-      },
-    },
-  });
+    });
+  } catch {
+    return [];
+  }
 }
 
 async function getLatestSnippets() {
-  return prisma.snippet.findMany({
-    where: { isPublic: true },
-    orderBy: { createdAt: "desc" },
-    take: 4,
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          avatarUrl: true,
+  try {
+    return await prisma.snippet.findMany({
+      where: { isPublic: true },
+      orderBy: { createdAt: "desc" },
+      take: 4,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatarUrl: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+            comments: true,
+          },
         },
       },
-      tags: {
-        include: {
-          tag: true,
-        },
-      },
-      _count: {
-        select: {
-          likes: true,
-          comments: true,
-        },
-      },
-    },
-  });
+    });
+  } catch {
+    return [];
+  }
 }
 
 async function getPopularTags() {
-  return prisma.tag.findMany({
-    orderBy: { usageCount: "desc" },
-    take: 12,
-  });
+  try {
+    return await prisma.tag.findMany({
+      orderBy: { usageCount: "desc" },
+      take: 12,
+    });
+  } catch {
+    return [];
+  }
 }
 
 async function getTopContributors() {
-  return prisma.user.findMany({
-    orderBy: { snippetCount: "desc" },
-    take: 5,
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      avatarUrl: true,
-      snippetCount: true,
-      totalLikesReceived: true,
-    },
-  });
+  try {
+    return await prisma.user.findMany({
+      orderBy: { snippetCount: "desc" },
+      take: 5,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        avatarUrl: true,
+        snippetCount: true,
+        totalLikesReceived: true,
+      },
+    });
+  } catch {
+    return [];
+  }
 }
 
 export default async function HomePage() {
