@@ -309,6 +309,17 @@ export default async function SnippetPage({ params }: SnippetPageProps) {
           <ForkButton snippetId={snippet.id} forkCount={snippet.forkCount} />
         </AnimatedActionBar>
 
+        {/* Share Section */}
+        <AnimatedSection className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <h2 className="text-xl font-bold text-gray-900">Share This Snippet</h2>
+          </div>
+          <ShareSection shareUrl={shareUrl} />
+        </AnimatedSection>
+
         {/* Code Block */}
         <AnimatedCodeBlock className="mb-8">
           <div className="flex items-center gap-3 mb-4">
@@ -321,17 +332,6 @@ export default async function SnippetPage({ params }: SnippetPageProps) {
             <CodeBlock code={snippet.code} language={snippet.language} />
           </div>
         </AnimatedCodeBlock>
-
-        {/* Share Section */}
-        <AnimatedSection className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
-            <h2 className="text-xl font-bold text-gray-900">Share This Snippet</h2>
-          </div>
-          <ShareSection shareUrl={shareUrl} />
-        </AnimatedSection>
 
         {/* Comments Section */}
         <AnimatedSection>
