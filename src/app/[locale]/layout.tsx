@@ -6,6 +6,8 @@ import { Toaster } from "react-hot-toast";
 import Navigation from "@/components/Navigation";
 import SessionProvider from "@/components/SessionProvider";
 import { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -64,6 +66,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
+        <Analytics />
+
         <SessionProvider>
           <NextIntlClientProvider messages={messages}>
             <Navigation />
