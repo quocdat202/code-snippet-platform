@@ -8,8 +8,6 @@ import SessionProvider from "@/components/SessionProvider";
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
   title: {

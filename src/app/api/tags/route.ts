@@ -25,7 +25,9 @@ export async function GET(req: Request) {
       take: popular ? 20 : 100,
     });
 
-    return NextResponse.json(tags);
+    return NextResponse.json(tags, {
+      headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" },
+    });
   } catch (error) {
     console.error("Get tags error:", error);
     return NextResponse.json(

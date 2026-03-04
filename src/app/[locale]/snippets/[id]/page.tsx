@@ -22,7 +22,6 @@ import {
 } from "@/components/PageAnimations";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 interface SnippetPageProps {
   params: Promise<{
