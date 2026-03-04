@@ -98,7 +98,9 @@
     "views": "views",
     "forks": "forks",
     "likes": "likes",
-    "comments": "comments"
+    "comments": "comments",
+    "createNew": "Create New Snippet",
+    "cancel": "Cancel"
   },
   "auth": {
     "email": "Email address",
@@ -114,7 +116,8 @@
     "registerSuccess": "Account created successfully!",
     "loginButton": "Login",
     "loading": "Loading...",
-    "loginSuccess": "Logged in successfully!"
+    "loginSuccess": "Logged in successfully!",
+    "invalidCredentials": "Invalid email or password"
   },
   "profile": {
     "publicSnippets": "Public Snippets",
@@ -139,7 +142,11 @@
     "avatarUrl": "Avatar URL",
     "avatarUrlPlaceholder": "https://example.com/avatar.jpg",
     "updateSuccess": "Profile updated successfully!",
-    "updateError": "Failed to update profile"
+    "updateError": "Failed to update profile",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "bookmarks": {
     "title": "Bookmarks",

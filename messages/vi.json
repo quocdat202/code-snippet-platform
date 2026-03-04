@@ -98,7 +98,9 @@
     "views": "lượt xem",
     "forks": "lượt fork",
     "likes": "lượt thích",
-    "comments": "bình luận"
+    "comments": "bình luận",
+    "createNew": "Tạo Snippet Mới",
+    "cancel": "Hủy"
   },
   "auth": {
     "email": "Địa chỉ email",
@@ -114,7 +116,8 @@
     "registerSuccess": "Tạo tài khoản thành công!",
     "loginButton": "Đăng nhập",
     "loading": "Đang tải...",
-    "loginSuccess": "Đăng nhập thành công!"
+    "loginSuccess": "Đăng nhập thành công!",
+    "invalidCredentials": "Email hoặc mật khẩu không đúng"
   },
   "profile": {
     "publicSnippets": "Đoạn mã công khai",
@@ -139,7 +142,11 @@
     "avatarUrl": "URL ảnh đại diện",
     "avatarUrlPlaceholder": "https://example.com/avatar.jpg",
     "updateSuccess": "Cập nhật hồ sơ thành công!",
-    "updateError": "Cập nhật hồ sơ thất bại"
+    "updateError": "Cập nhật hồ sơ thất bại",
+    "name": "Tên",
+    "namePlaceholder": "Tên của bạn",
+    "save": "Lưu",
+    "cancel": "Hủy"
   },
   "bookmarks": {
     "title": "Đã lưu",

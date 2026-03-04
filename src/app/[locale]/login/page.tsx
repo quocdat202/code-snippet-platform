@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useState } from "react";
-import { signIn } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -14,8 +14,8 @@ const fadeInUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const }
-  })
+    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const },
+  }),
 };
 
 const fadeInLeft = {
@@ -23,8 +23,8 @@ const fadeInLeft = {
   visible: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" as const }
-  })
+    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" as const },
+  }),
 };
 
 const fadeInRight = {
@@ -32,8 +32,8 @@ const fadeInRight = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const }
-  }
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
 };
 
 const scaleIn = {
@@ -41,8 +41,8 @@ const scaleIn = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" }
-  }
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 export default function LoginPage() {
@@ -52,6 +52,13 @@ export default function LoginPage() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const router = useRouter();
   const t = useTranslations("auth");
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/");
+    }
+  }, [status, router]);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -78,7 +85,7 @@ export default function LoginPage() {
         setIsLoading(false);
       }
     },
-    [email, password, router, t]
+    [email, password, router, t],
   );
 
   return (
@@ -139,7 +146,8 @@ export default function LoginPage() {
             variants={fadeInLeft}
             className="text-lg text-gray-300 mb-12 max-w-md leading-relaxed"
           >
-            Share, discover, and learn from thousands of code snippets created by developers worldwide.
+            Share, discover, and learn from thousands of code snippets created
+            by developers worldwide.
           </motion.p>
 
           {/* Features */}
@@ -160,7 +168,11 @@ export default function LoginPage() {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.5 + index * 0.1, type: "spring", stiffness: 500 }}
+                  transition={{
+                    delay: 0.5 + index * 0.1,
+                    type: "spring",
+                    stiffness: 500,
+                  }}
                   className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"
                 />
                 <span>{feature}</span>
@@ -177,7 +189,7 @@ export default function LoginPage() {
           className="absolute bottom-12 right-12"
         >
           <pre className="text-xs text-cyan-300 font-mono">
-{`function welcome() {
+            {`function welcome() {
   return "Hello, Developer!";
 }`}
           </pre>
@@ -206,7 +218,9 @@ export default function LoginPage() {
               <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
                 <Code2 className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">CodeSnippet</span>
+              <span className="text-xl font-bold text-gray-900">
+                CodeSnippet
+              </span>
             </Link>
           </motion.div>
 
@@ -251,15 +265,20 @@ export default function LoginPage() {
               variants={fadeInUp}
               className="space-y-2"
             >
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 {t("email")}
               </label>
               <motion.div
                 whileFocus={{ scale: 1.02 }}
-                className={`relative group transition-all duration-300 ${focusedField === 'email' ? 'scale-[1.02]' : ''}`}
+                className={`relative group transition-all duration-300 ${focusedField === "email" ? "scale-[1.02]" : ""}`}
               >
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail className={`w-5 h-5 transition-colors duration-300 ${focusedField === 'email' ? 'text-purple-500' : 'text-gray-400'}`} />
+                  <Mail
+                    className={`w-5 h-5 transition-colors duration-300 ${focusedField === "email" ? "text-purple-500" : "text-gray-400"}`}
+                  />
                 </div>
                 <input
                   id="email"
@@ -268,7 +287,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setFocusedField('email')}
+                  onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
                   className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 hover:border-gray-300"
                   placeholder="you@example.com"
@@ -284,15 +303,20 @@ export default function LoginPage() {
               variants={fadeInUp}
               className="space-y-2"
             >
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 {t("password")}
               </label>
               <motion.div
                 whileFocus={{ scale: 1.02 }}
-                className={`relative group transition-all duration-300 ${focusedField === 'password' ? 'scale-[1.02]' : ''}`}
+                className={`relative group transition-all duration-300 ${focusedField === "password" ? "scale-[1.02]" : ""}`}
               >
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className={`w-5 h-5 transition-colors duration-300 ${focusedField === 'password' ? 'text-purple-500' : 'text-gray-400'}`} />
+                  <Lock
+                    className={`w-5 h-5 transition-colors duration-300 ${focusedField === "password" ? "text-purple-500" : "text-gray-400"}`}
+                  />
                 </div>
                 <input
                   id="password"
@@ -301,7 +325,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onFocus={() => setFocusedField('password')}
+                  onFocus={() => setFocusedField("password")}
                   onBlur={() => setFocusedField(null)}
                   className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 hover:border-gray-300"
                   placeholder="••••••••"
@@ -326,7 +350,11 @@ export default function LoginPage() {
                 {isLoading ? (
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                     className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full"
                   />
                 ) : (
@@ -340,7 +368,7 @@ export default function LoginPage() {
           </form>
 
           {/* Footer */}
-          <motion.p
+          {/* <motion.p
             custom={4}
             initial="hidden"
             animate="visible"
@@ -355,7 +383,7 @@ export default function LoginPage() {
             <Link href="/privacy" className="text-purple-600 hover:text-purple-700 font-medium">
               Privacy Policy
             </Link>
-          </motion.p>
+          </motion.p> */}
         </motion.div>
       </div>
     </div>

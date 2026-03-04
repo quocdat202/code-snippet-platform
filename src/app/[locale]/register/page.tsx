@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { Mail, Lock, User, ArrowRight, Code2, Rocket, CheckCircle2 } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  User,
+  ArrowRight,
+  Code2,
+  Rocket,
+  CheckCircle2,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -13,8 +22,8 @@ const fadeInUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const }
-  })
+    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const },
+  }),
 };
 
 const fadeInLeft = {
@@ -22,8 +31,8 @@ const fadeInLeft = {
   visible: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" as const }
-  })
+    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" as const },
+  }),
 };
 
 const fadeInRight = {
@@ -31,8 +40,8 @@ const fadeInRight = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const }
-  }
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
 };
 
 export default function RegisterPage() {
@@ -43,6 +52,13 @@ export default function RegisterPage() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const router = useRouter();
   const t = useTranslations();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/");
+    }
+  }, [status, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,7 +118,9 @@ export default function RegisterPage() {
               <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
                 <Code2 className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">CodeSnippet</span>
+              <span className="text-xl font-bold text-gray-900">
+                CodeSnippet
+              </span>
             </Link>
           </motion.div>
 
@@ -141,12 +159,19 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Name field */}
             <div className="space-y-2">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
                 {t("common.name")}
               </label>
-              <div className={`relative group transition-all duration-300 ${focusedField === 'name' ? 'scale-[1.02]' : ''}`}>
+              <div
+                className={`relative group transition-all duration-300 ${focusedField === "name" ? "scale-[1.02]" : ""}`}
+              >
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <User className={`w-5 h-5 transition-colors duration-300 ${focusedField === 'name' ? 'text-purple-500' : 'text-gray-400'}`} />
+                  <User
+                    className={`w-5 h-5 transition-colors duration-300 ${focusedField === "name" ? "text-purple-500" : "text-gray-400"}`}
+                  />
                 </div>
                 <input
                   id="name"
@@ -154,7 +179,7 @@ export default function RegisterPage() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  onFocus={() => setFocusedField('name')}
+                  onFocus={() => setFocusedField("name")}
                   onBlur={() => setFocusedField(null)}
                   className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 hover:border-gray-300"
                   placeholder={t("common.namePlaceholder")}
@@ -164,12 +189,19 @@ export default function RegisterPage() {
 
             {/* Email field */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 {t("common.email")}
               </label>
-              <div className={`relative group transition-all duration-300 ${focusedField === 'email' ? 'scale-[1.02]' : ''}`}>
+              <div
+                className={`relative group transition-all duration-300 ${focusedField === "email" ? "scale-[1.02]" : ""}`}
+              >
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail className={`w-5 h-5 transition-colors duration-300 ${focusedField === 'email' ? 'text-purple-500' : 'text-gray-400'}`} />
+                  <Mail
+                    className={`w-5 h-5 transition-colors duration-300 ${focusedField === "email" ? "text-purple-500" : "text-gray-400"}`}
+                  />
                 </div>
                 <input
                   id="email"
@@ -178,7 +210,7 @@ export default function RegisterPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setFocusedField('email')}
+                  onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
                   className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 hover:border-gray-300"
                   placeholder={t("common.emailPlaceholder")}
@@ -188,12 +220,19 @@ export default function RegisterPage() {
 
             {/* Password field */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 {t("common.password")}
               </label>
-              <div className={`relative group transition-all duration-300 ${focusedField === 'password' ? 'scale-[1.02]' : ''}`}>
+              <div
+                className={`relative group transition-all duration-300 ${focusedField === "password" ? "scale-[1.02]" : ""}`}
+              >
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className={`w-5 h-5 transition-colors duration-300 ${focusedField === 'password' ? 'text-purple-500' : 'text-gray-400'}`} />
+                  <Lock
+                    className={`w-5 h-5 transition-colors duration-300 ${focusedField === "password" ? "text-purple-500" : "text-gray-400"}`}
+                  />
                 </div>
                 <input
                   id="password"
@@ -202,14 +241,16 @@ export default function RegisterPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onFocus={() => setFocusedField('password')}
+                  onFocus={() => setFocusedField("password")}
                   onBlur={() => setFocusedField(null)}
                   className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 hover:border-gray-300"
                   placeholder={t("common.passwordPlaceholder")}
                   minLength={6}
                 />
               </div>
-              <p className="text-xs text-gray-500 mt-1 ml-1">Minimum 6 characters</p>
+              <p className="text-xs text-gray-500 mt-1 ml-1">
+                Minimum 6 characters
+              </p>
             </div>
 
             {/* Submit button */}
@@ -230,7 +271,7 @@ export default function RegisterPage() {
           </form>
 
           {/* Footer */}
-          <motion.p
+          {/* <motion.p
             custom={4}
             initial="hidden"
             animate="visible"
@@ -245,7 +286,7 @@ export default function RegisterPage() {
             <Link href="/privacy" className="text-purple-600 hover:text-purple-700 font-medium">
               Privacy Policy
             </Link>
-          </motion.p>
+          </motion.p> */}
         </motion.div>
       </div>
 
@@ -305,7 +346,8 @@ export default function RegisterPage() {
             variants={fadeInLeft}
             className="text-lg text-gray-300 mb-12 max-w-md leading-relaxed"
           >
-            Create an account to share your code snippets, discover solutions, and connect with developers around the world.
+            Create an account to share your code snippets, discover solutions,
+            and connect with developers around the world.
           </motion.p>
 
           {/* Benefits */}
@@ -322,12 +364,18 @@ export default function RegisterPage() {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.5 + index * 0.1, type: "spring", stiffness: 500 }}
+                  transition={{
+                    delay: 0.5 + index * 0.1,
+                    type: "spring",
+                    stiffness: 500,
+                  }}
                   className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 flex items-center justify-center"
                 >
                   <CheckCircle2 className="w-4 h-4 text-cyan-400" />
                 </motion.div>
-                <span className="group-hover:text-white transition-colors">{benefit}</span>
+                <span className="group-hover:text-white transition-colors">
+                  {benefit}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -342,7 +390,7 @@ export default function RegisterPage() {
             {[
               { value: "10K+", label: "Developers" },
               { value: "50K+", label: "Snippets" },
-              { value: "100+", label: "Languages" }
+              { value: "100+", label: "Languages" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -350,7 +398,9 @@ export default function RegisterPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.9 + index * 0.1 }}
               >
-                <div className="text-3xl font-bold text-white">{stat.value}</div>
+                <div className="text-3xl font-bold text-white">
+                  {stat.value}
+                </div>
                 <div className="text-sm text-gray-400">{stat.label}</div>
               </motion.div>
             ))}
@@ -365,7 +415,7 @@ export default function RegisterPage() {
           className="absolute bottom-12 left-12"
         >
           <pre className="text-xs text-purple-300 font-mono">
-{`const developer = {
+            {`const developer = {
   name: "You",
   skills: ["awesome"]
 };`}
